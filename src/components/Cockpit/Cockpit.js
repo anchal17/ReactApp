@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import classes from './Cockpit.css';
 
+
+//whenever any update occurs useEffect works
 const Cockpit = (props) => {
+    console.log('[App.js] Cockpit');
+    useEffect(() => {
+        setTimeout(()=>{
+            alert('data saved');
+        }, 1000)
+    }, props.persons.js)
     const assignedClass = [];
     let btnClass = '';
     if(props.showPersons){
@@ -15,7 +23,7 @@ const Cockpit = (props) => {
     }
     return (
         <div className={classes.Cockpit}>
-        <h1>It's React App.</h1>
+        <h1>{props.title}</h1>
         <p className={assignedClass.join( ' ')}> This is real</p>
         <button className={btnClass} onClick={props.clicked}>Click Me!</button>
         </div>

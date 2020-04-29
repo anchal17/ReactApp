@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-// import Person from './components/Persons/Person/Person';
 import Persons from './components/Persons/Persons';
 import Cockpit from './components/Cockpit/Cockpit';
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    console.log('[App.js] constructor')
+  }
 
   state = {
     persons: [
@@ -16,6 +19,18 @@ class App extends Component {
     userInputValue: ''
   }
 
+  static getDerivedStateFromProps(props, state){
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('[App.js] componentDidMount...');
+  }
+
+  componentWillMount(){
+    console.log('[App.js] componentWillMount...');
+  }
 
   switchNameHandler = () =>{
     window.alert();
@@ -67,7 +82,11 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Cockpit showPersons={this.state.showPersons} persons={this.state.persons} clicked={this.togglePersonHandler}/>
+        <Cockpit 
+        title = {this.props.appTitle}
+        showPersons={this.state.showPersons} 
+        persons={this.state.persons} 
+        clicked={this.togglePersonHandler}/>
         {/* <h1>It's Me.</h1>
         <br/>
         <input type="text" onChange = {(event) => this.calculateLength(event)} value = {this.state.userInputValue}/>
