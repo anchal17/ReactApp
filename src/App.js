@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import Persons from './components/Persons/Persons';
 import Cockpit from './components/Cockpit/Cockpit';
+import withClass from './hoc/withClass';
 class App extends Component {
+
+  //here we can also extend PureComponent instead of component as we don't need to hook like shouldComponentUpdate because it
+  //already has that method internally.
 
   constructor(props){
     super(props);
@@ -30,6 +34,15 @@ class App extends Component {
 
   componentWillMount(){
     console.log('[App.js] componentWillMount...');
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('[App.js] shouldComponentUpdate, nextProps...', nextProps, nextState)
+    if(nextProps.persons !== this.props.persons || nextProps.changed !== this.props.changed || nextProps.clicked !== this.props.clicked){
+      return true;
+    } else{
+      return false;
+    }
   }
 
   switchNameHandler = () =>{
